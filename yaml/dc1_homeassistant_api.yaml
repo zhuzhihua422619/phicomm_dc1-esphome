@@ -14,7 +14,7 @@ esphome:
 substitutions:
   config_version: 'v2019.12.26.001'
   #设备名称（多个dc1改成不一样的，API接入和ESPHOME容器会识别这个作为名称显示）
-  device_name: phicomm_dc1_api
+  device_name: phicomm_dc1
   #如果SSID是隐藏的，设置为true
   wifi_fast_connect: 'false'
   #WiFi离线多久后重启设备，秒s/分钟min/小时h，不需要此功能设置为0s，建议设置0s，防止异常重启，或者设置的大一些
@@ -22,12 +22,12 @@ substitutions:
   #与API服务端失去连接多久后重启设备，秒s/分钟min/小时h，不需要此功能设置为0s，建议设置0s，防止异常重启，或者设置的大一些
   api_reboot_timeout: 0s
   #电量统计的数据刷新时间（内部刷新时间，非上报周期），秒s/分钟min/小时h
-  cse7766_update_interval: 1s
+  cse7766_update_interval: 10s
 
 #------- WIFI配置 -------
 wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
+  ssid: $wifi_ssid
+  password: $wifi_password
 #----------需要设置静态地址的改下面的配置------------
 #  manual_ip:
 #    static_ip: 192.168.178.230
@@ -58,14 +58,14 @@ api:
 #------- OTA 空中升级配置 -------
 ota:
   safe_mode: true
-  password: !secret ota_password
+  password: 1
 #  port: 3286
 
 #------- WEB后台，不建议使用 -------
-#web_server:
-#  port: 80
-#  css_url: https://esphome.io/_static/webserver-v1.min.css
-#  js_url: https://esphome.io/_static/webserver-v1.min.js
+web_server:
+  port: 80
+  css_url: https://esphome.io/_static/webserver-v1.min.css
+  js_url: https://esphome.io/_static/webserver-v1.min.js
 #----------------------------------------------------
 
 #------- 深度休眠配置，一般情况下不建议使用，休眠后将无法远程控制设置 -------
